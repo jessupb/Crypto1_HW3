@@ -1,0 +1,6 @@
+Jessup Barrueco
+Crypto 1 HW3 Programming - Blum Goldwasser
+
+To compile and run my program, download BlumGoldwasser.java and, from a terminal window in that directory execute the following:
+> javac BlumGoldwasser.java
+> java BlumGoldwasser
