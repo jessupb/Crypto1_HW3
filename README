@@ -3,6 +3,16 @@ Crypto 1 HW3 Programming - Blum Goldwasser
 
 The Blum-Goldwasser Cryptosystem is a probabilistic, semantically secure cryptosystem with a constant-size ciphertext expansion. For this implementation, as per the Assignment Instructions, the following variables are hard-coded:
 
+Two large prime integers (p=499), (q=547) which are both equivalent to 3 mod 4.
+Multiplied together, we observe the value n=pq=272953, and by definition, n is a Blum Integer.
+
+Integers (a=(-57)), (b=52) from Euclid's Extended Algorithm such that ap+bq=1
+
+A random "seed" x0 chosen from the Quadratic Residue set of n (QRn), defined such that in this implementation, x0=159201.
+
+An integer (k=floor(log(n))=18) and (h=floor(log(k))=4), two values computed in the class lecture.
+
+A fixed plaintext message (m="10011100000100001100")
 
 To compile and run my program, download BlumGoldwasser.java and, from a terminal window in that directory execute the following:
 > javac BlumGoldwasser.java
