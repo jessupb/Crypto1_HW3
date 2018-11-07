@@ -2,17 +2,16 @@ Jessup Barrueco
 Crypto 1 HW3 Programming - Blum Goldwasser
 
 The Blum-Goldwasser Cryptosystem is a probabilistic, semantically secure cryptosystem with a constant-size ciphertext expansion. For this implementation, as per the Assignment Instructions, the following variables are hard-coded:
+> Two large prime integers (p=499), (q=547) which are both equivalent to 3 mod 4.
+> Multiplied together, we observe the value n=pq=272953, and by definition, n is a Blum Integer.
+> Integers (a=(-57)), (b=52) from Euclid's Extended Algorithm such that ap+bq=1
+> A random "seed" x0 chosen from the Quadratic Residue set of n (QRn), defined such that in this implementation, x0=159201.
+> An integer (k=floor(log(n))=18) and (h=floor(log(k))=4), two values computed in the class lecture.
+> A fixed plaintext message (m="10011100000100001100")
 
-Two large prime integers (p=499), (q=547) which are both equivalent to 3 mod 4.
-Multiplied together, we observe the value n=pq=272953, and by definition, n is a Blum Integer.
+The Blum-Goldwasser process begins by splitting the message m into t blocks of size h. In our implementation, t=5 and h=4, so the plaintext message m is broken up into 5 blocks of 4-bits each. Then, we will generate t+1, or 6, iterative values x_i, where x_i = (x_(i-1)^2), so x1 = x0^2. The x_(t+1)th value, in this implementation x_6, will be an important value moving forward. My code defines this variable as xt1. As this Xi series is generated, the h least-significant bits of each x_i entry are captured and defined as p_i entries of a Pi series. Each block in Pi is now the same bit size as each block of the plaintext. To generate ciphertext blocks c_i, you XOR m_i with p_i. Once that process is complete, append the value of xt1 to get the final ciphertext.
 
-Integers (a=(-57)), (b=52) from Euclid's Extended Algorithm such that ap+bq=1
-
-A random "seed" x0 chosen from the Quadratic Residue set of n (QRn), defined such that in this implementation, x0=159201.
-
-An integer (k=floor(log(n))=18) and (h=floor(log(k))=4), two values computed in the class lecture.
-
-A fixed plaintext message (m="10011100000100001100")
+To retrieve the original plaintext from the ciphertext, XOR each h-bit ciphertext block with its corresponding p_i entry. In order to do this, the receiver must re-generate the Xi and Pi series, so the goal is to recalculate x0 from the ciphertext.
 
 To compile and run my program, download BlumGoldwasser.java and, from a terminal window in that directory execute the following:
 > javac BlumGoldwasser.java
